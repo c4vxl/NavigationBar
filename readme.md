@@ -20,8 +20,8 @@ This is a custom navigation bar created using HTML, CSS, and JavaScript. The nav
 3. The last step will be to add the html code of the navigation bar to your project:
 ```html
 <nav class="navbar">
-    <div class="navbar__logo">
-        <img src="" alt=""> <!-- Put your logo in here -->
+    <div class="navbar__logo__container">
+        <img src="" alt="" class="navbar__logo"> <!--Change to your logo-->
     </div>
 
     <ul class="navbar__links">
