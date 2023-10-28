@@ -1,0 +1,172 @@
+/* Set variables */
+.navbar {
+    --color: white; /* Text color */
+    --bg-color: black; /* Background color */
+    --link-hover-color: orangered; /* Link hover color */
+    --link-transition-time: 0.3s; /* Link transition time */
+    --link-underline-height: 2px; /* Height of the link underline */
+    --links-gap: 30px; /* Gap between links */
+    --dropdown-container-bg: var(--bg-color); /* Background color for dropdown container */
+    --dropdown-container-padding: 10px; /* Padding for dropdown container */
+    --phone-button-height: 3ch; /* Height of the phone button */
+    --phone-button-width: 5ch; /* Width of the phone button */
+    --phone-button-row-height: 2px; /* Height of phone button row */
+    --phone-button-transition-time: var(--link-transition-time); /* Transition time for the phone button */
+    --logo-width: 10ch; /* Width of the logo */
+    --logo-transition-time: 0.6s; /* Transition time for the logo */
+}
+.navbar.scrolled {
+    --logo-width: 6ch; /* Overwrite logo size when scrolled */
+}
+/* End of variables */
+
+
+.navbar {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: max-content;
+    background-color: var(--bg-color);
+    color: var(--color);
+    padding: var(--padding) 0;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+
+/* Logo style */
+.navbar .navbar__logo__container {
+    width: var(--logo-width);
+    height: var(--logo-width);
+    transition: var(--logo-transition-time);
+}
+.navbar .navbar__logo__container .navbar__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+/* End of logo style */
+
+/* Style links */
+.navbar a {
+    color: var(--color);
+    text-decoration: none;
+    transition: var(--link-transition-time);
+    position: relative;
+    cursor: pointer;
+}
+.navbar a::before {
+    position: absolute;
+    content: "";
+    top: 100%;
+    height: var(--link-underline-height);
+    width: 0%;
+    background-color: var(--link-hover-color);
+    transition: var(--link-transition-time);
+}
+.navbar a:hover {
+    color: var(--link-hover-color);
+}
+.navbar a:hover::before {
+    width: 100%;
+}
+
+.navbar .navbar__links {
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--links-gap) / 2);
+}
+.navbar .navbar__links .dropdown {
+    position: relative;
+}
+.navbar .navbar__links .dropdown .dropdown__content {
+    position: absolute;
+    top: 100%;
+    list-style: none;
+    padding: var(--dropdown-container-padding);
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--dropdown-container-bg);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--links-gap) / 2);
+}
+.navbar .navbar__links .dropdown.active .dropdown__content, .navbar .navbar__links .dropdown:hover .dropdown__content {
+    display: flex;
+}
+.navbar .navbar__links .dropdown.active .dropdown__title, .navbar .navbar__links .dropdown:hover .dropdown__title {
+    background-color: var(--link-hover-color);
+    color: var(--color);
+}
+/* End of links style */
+
+/* Phone view */
+.navbar .navbar__phone__button {
+    width: var(--phone-button-width);
+    height: var(--phone-button-height);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+.navbar .navbar__phone__button span {
+    height: var(--phone-button-row-height);
+    width: 100%;
+    background-color: var(--color);
+    transition: var(--phone-button-transition-time);
+}
+.navbar.active .navbar__phone__button span:nth-child(1) {
+    transform: translate(-100%);
+}
+.navbar.active .navbar__phone__button span:nth-child(2), .navbar.active .navbar__phone__button span:nth-child(3) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.navbar.active .navbar__phone__button span:nth-child(2) {
+    transform: rotate(43deg);
+}
+.navbar.active .navbar__phone__button span:nth-child(3) {
+    transform: rotate(-43deg);
+}
+
+@media (max-width: 1000px) {
+    .navbar.active {
+        flex-direction: column;
+        align-items: center;
+        max-height: 100vh;
+        overflow-x: hidden;
+        justify-content: unset;
+    }
+    .navbar .navbar__links {
+        display: none;
+        flex-direction: column;
+    }
+    .navbar.active .navbar__links {
+        display: flex;
+    }
+    .navbar .navbar__links .dropdown .dropdown__content {
+        position: unset;
+    }
+    .navbar .navbar__phone__button {
+        display: flex;
+    }
+    .navbar.active .navbar__phone__button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+}
+/* End of phone view */
