@@ -1,16 +1,22 @@
 const navbar = document.querySelector(".navbar");
-const phone__button = navbar.querySelector(".navbar__phone__button");
-const links__container = navbar.querySelector(".navbar__links");
-const dropdowns = links__container.querySelectorAll(".dropdown");
+const links_container = navbar.querySelector(".navbar__links");
+const dropdowns = links_container.querySelectorAll(".dropdown");
+const phone_btn = navbar.querySelector(".navbar__button");
 
 dropdowns.forEach(dropdown => {
     const title = dropdown.querySelector(".dropdown__title");
     title.addEventListener("click", (event) => {
         dropdown.classList.toggle("active");
     });
+    dropdown.addEventListener("mouseenter", (event) => {
+        dropdown.classList.add("active");
+    });
+    dropdown.addEventListener("mouseleave", (event) => {
+        dropdown.classList.remove("active");
+    });
 });
 
-phone__button.addEventListener("click", (event) => {
+phone_btn.addEventListener("click", (event) => {
     navbar.classList.toggle("active");
 });
 

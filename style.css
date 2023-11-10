@@ -1,72 +1,52 @@
-/* Set variables */
 .navbar {
     --color: white; /* Text color */
-    --bg-color: black; /* Background color */
+    --bg-color: #2e2e2e; /* Background color */
+    --logo-size: 10ch; /* Size of the logo */
+    --logo-transition-time: 0.5s; /* Logo transition time */
+    --links-gap: 10px; /* Gap between links */
+    --link-hover-transition-time: 0.4s; /* Link hover transition time */
+    --link-hover-underline-height: 1px; /* Link hover underline height */
     --link-hover-color: orangered; /* Link hover color */
-    --link-transition-time: 0.3s; /* Link transition time */
-    --link-underline-height: 2px; /* Height of the link underline */
-    --links-gap: 30px; /* Gap between links */
-    --dropdown-container-bg: var(--bg-color); /* Background color for dropdown container */
-    --dropdown-container-padding: 10px; /* Padding for dropdown container */
-    --phone-button-height: 3ch; /* Height of the phone button */
-    --phone-button-width: 5ch; /* Width of the phone button */
-    --phone-button-row-height: 2px; /* Height of phone button row */
-    --phone-button-transition-time: var(--link-transition-time); /* Transition time for the phone button */
-    --logo-width: 10ch; /* Width of the logo */
-    --logo-transition-time: 0.6s; /* Transition time for the logo */
+    --dropdown-content-bg-color: #100f0f; /* Dropdown content background color */
+    --phone-btn-height: 3ch; /* Phone button height */
+    --phone-btn-width: 5ch; /* Phone button width */
+    --phone-btn-row-height: 1px; /* Phone button row height */
+    --phone-btn-transition-time: 0.4s; /* Phone button transition time */
 }
 .navbar.scrolled {
-    --logo-width: 6ch; /* Overwrite logo size when scrolled */
+    --logo-size: 6ch;
 }
-/* End of variables */
-
 
 .navbar {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
-    height: max-content;
     background-color: var(--bg-color);
-    color: var(--color);
-    padding: var(--padding) 0;
-    position: sticky;
-    top: 0px;
-    left: 0px;
+    max-height: 100vh;
+    z-index: 9999;
 }
 
-/* Logo style */
-.navbar .navbar__logo__container {
-    width: var(--logo-width);
-    height: var(--logo-width);
-    transition: var(--logo-transition-time);
-}
-.navbar .navbar__logo__container .navbar__logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-/* End of logo style */
-
-/* Style links */
 .navbar a {
     color: var(--color);
     text-decoration: none;
-    transition: var(--link-transition-time);
     position: relative;
+    transition: var(--link-hover-transition-time);
     cursor: pointer;
+    padding: 3px;
 }
 .navbar a::before {
     position: absolute;
     content: "";
+    height: var(--link-hover-underline-height);
+    width: 0;
     top: 100%;
-    height: var(--link-underline-height);
-    width: 0%;
     background-color: var(--link-hover-color);
-    transition: var(--link-transition-time);
+    transition: var(--link-hover-transition-time);
 }
 .navbar a:hover {
     color: var(--link-hover-color);
@@ -75,98 +55,108 @@
     width: 100%;
 }
 
+.navbar .navbar__logo__container {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    overflow: hidden;
+    transition: var(--logo-transition-time);
+}
+.navbar .navbar__logo__container .navbar__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .navbar .navbar__links {
+    display: flex;
     list-style: none;
     padding: 0px;
-    display: flex;
+    gap: var(--links-gap);
     flex-wrap: wrap;
-    align-items: center;
-    gap: calc(var(--links-gap) / 2);
 }
 .navbar .navbar__links .dropdown {
     position: relative;
 }
-.navbar .navbar__links .dropdown .dropdown__content {
+.navbar .navbar__links .dropdown .dropdown__title::before {
+    display: none;
+}
+.navbar .navbar__links .dropdown .dropdown__links {
     position: absolute;
     top: 100%;
+    padding: var(--links-gap) 0;
     list-style: none;
-    padding: var(--dropdown-container-padding);
-    box-sizing: border-box;
-    width: 100%;
-    background-color: var(--dropdown-container-bg);
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: calc(var(--links-gap) / 2);
+    box-sizing: border-box;
+    width: 100%;
+    gap: var(--links-gap);
+    background-color: var(--dropdown-content-bg-color);
+    box-shadow: 1px 1px 50px var(--dropdown-content-bg-color);
+    border-radius: 5px;
 }
-.navbar .navbar__links .dropdown.active .dropdown__content, .navbar .navbar__links .dropdown:hover .dropdown__content {
+.navbar .navbar__links .dropdown.active .dropdown__links {
     display: flex;
 }
-.navbar .navbar__links .dropdown.active .dropdown__title, .navbar .navbar__links .dropdown:hover .dropdown__title {
-    background-color: var(--link-hover-color);
-    color: var(--color);
-}
-/* End of links style */
 
-/* Phone view */
-.navbar .navbar__phone__button {
-    width: var(--phone-button-width);
-    height: var(--phone-button-height);
+.navbar .navbar__button {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
+    height: var(--phone-btn-height);
+    width: var(--phone-btn-width);
     overflow: hidden;
+    position: relative;
 }
-.navbar .navbar__phone__button span {
-    height: var(--phone-button-row-height);
+.navbar .navbar__button span {
     width: 100%;
+    height: var(--phone-btn-row-height);
     background-color: var(--color);
-    transition: var(--phone-button-transition-time);
+    transition: var(--phone-btn-transition-time);
 }
-.navbar.active .navbar__phone__button span:nth-child(1) {
+.navbar.active .navbar__button span:nth-child(1) {
     transform: translate(-100%);
 }
-.navbar.active .navbar__phone__button span:nth-child(2), .navbar.active .navbar__phone__button span:nth-child(3) {
+.navbar.active .navbar__button span:nth-child(2) {
+    transform: rotate(-43deg);
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
     right: 0;
     margin: auto;
 }
-.navbar.active .navbar__phone__button span:nth-child(2) {
+.navbar.active .navbar__button span:nth-child(3) {
     transform: rotate(43deg);
-}
-.navbar.active .navbar__phone__button span:nth-child(3) {
-    transform: rotate(-43deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
 }
 
 @media (max-width: 1000px) {
     .navbar.active {
-        flex-direction: column;
-        align-items: center;
-        max-height: 100vh;
-        overflow-x: hidden;
-        justify-content: unset;
+        display: grid;
+        overflow-y: auto;
     }
     .navbar .navbar__links {
         display: none;
-        flex-direction: column;
     }
     .navbar.active .navbar__links {
         display: flex;
+        flex-direction: column;
     }
-    .navbar .navbar__links .dropdown .dropdown__content {
-        position: unset;
-    }
-    .navbar .navbar__phone__button {
+    .navbar .navbar__button {
         display: flex;
     }
-    .navbar.active .navbar__phone__button {
+    .navbar.active .navbar__button {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 10px;
+        right: 10px;
+    }
+    .navbar .navbar__links .dropdown .dropdown__links {
+        position: unset;
     }
 }
-/* End of phone view */

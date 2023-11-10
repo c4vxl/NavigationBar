@@ -19,21 +19,21 @@ This is a custom navigation bar created using HTML, CSS, and JavaScript. The nav
 
 3. The last step will be to add the html code of the navigation bar to your project:
 ```html
-<nav class="navbar">
-    <div class="navbar__logo__container">
-        <img src="" alt="" class="navbar__logo"> <!--Change to your logo-->
-    </div>
+    <nav class="navbar">
+        <div class="navbar__logo__container">
+            <img src="" alt="" class="navbar__logo"> <!--Add your logo-->
+        </div>
 
-    <ul class="navbar__links">
-        
-    </ul>
+        <ul class="navbar__links">
+            
+        </ul>
 
-    <div class="navbar__phone__button">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
+        <div class="navbar__button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 ```
 
 4. Add links and dropdowns:
@@ -61,20 +61,19 @@ This is a custom navigation bar created using HTML, CSS, and JavaScript. The nav
 
 You can customize the navigation bar appearance by modifying the CSS variables in the `style.css` file. Here are some of the variables you can adjust:
 
-- `--color` Text color
-- `--bg-color` Background color
-- `--link-hover-color`Link hover color
-- `--link-transition-time` Link transition time
-- `--link-underline-height` Height of the link underline
-- `--links-gap` Gap between links
-- `--dropdown-container-bg`: Background color for dropdown container
-- `--dropdown-container-padding` Padding for dropdown container
-- `--phone-button-height` Height of the phone button
-- `--phone-button-width` Width of the phone button
-- `--phone-button-row-height` Height of phone button row
-- `--phone-button-transition-time` Transition time for the phone button
-- `--logo-width` Width of the logo
-- `--logo-transition-time` Transition time for the logo
+- `color`: _Text color_
+- `bg-color`: _Background color_
+- `logo-size`: _Size of the logo_
+- `logo-transition-time`: _Logo transition time_
+- `links-gap`: _Gap between links_
+- `link-hover-transition-time`: _Link hover transition time_
+- `link-hover-underline-height`: _Link hover underline height_
+- `link-hover-color`: _Link hover color_
+- `dropdown-content-bg-color`: _Dropdown content background color_
+- `phone-btn-height`: _Phone button height_
+- `phone-btn-width`: _Phone button width_
+- `phone-btn-row-height`: _Phone button row height_
+- `phone-btn-transition-time`: _Phone button transition time_
 
 There is also the option to overwrite this variables when the user has scrolled down on the page:
 ```css
